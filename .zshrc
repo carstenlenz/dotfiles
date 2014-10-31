@@ -12,6 +12,11 @@ alias m='mvim --remote-silent'
 alias zshconf='m ~/.zshrc'
 alias readlink='greadlink'
 
+alias emacs='emacsc -n'
+alias e='emacsclient -n'
+alias ew='emacsclient'
+alias ecw='emacsc'
+
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -25,23 +30,20 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+
+export EDITOR='vim'
 
 export VAGRANT_HOME=/VM/.vagrant.d
 
-[[ -s "/Users/carsten.lenz/.gvm/bin/gvm-init.sh" ]] && source "/Users/carsten.lenz/.gvm/bin/gvm-init.sh"
-
-eval "$(jenv init -)"
-
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="$HOME/.jenv/bin:$PATH"
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/Users/carsten.lenz/bin:$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$PATH:$HOME/.jenv/bin"
+export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 
 function postCallVim
 {
   osascript -e 'tell application "MacVim" to activate'
 }
+
+eval "$(rbenv init -)"
+[[ -s "/Users/carsten.lenz/.gvm/bin/gvm-init.sh" ]] && source "/Users/carsten.lenz/.gvm/bin/gvm-init.sh"
+eval "$(jenv init -)"
