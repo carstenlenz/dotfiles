@@ -12,6 +12,7 @@ alias m='mvim --remote-silent'
 alias zshconf='m ~/.zshrc'
 alias readlink='greadlink'
 
+alias Emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 alias emacs='emacsc -n'
 alias e='emacsclient -n'
 alias ew='emacsclient'
