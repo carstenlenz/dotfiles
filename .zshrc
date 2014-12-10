@@ -7,11 +7,12 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
-# Example aliases
 alias m='mvim --remote-silent'
 alias zshconf='m ~/.zshrc'
 alias readlink='greadlink'
+alias gradle='gw'
 
+# Emacs aliases - too complicated by the way
 alias Emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 alias emacs='emacsc -n'
 alias e='emacsclient -n'
