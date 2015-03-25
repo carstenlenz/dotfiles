@@ -5,7 +5,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="pure"
 
 alias m='mvim --remote-silent'
 alias zshconf='m ~/.zshrc'
@@ -22,13 +23,14 @@ alias ecw='emacsc'
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git brew autojump vagrant vim-interaction)
+plugins=(git brew autojump vagrant vim-interaction osx lein wd)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 # You may need to manually set your language environment
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
