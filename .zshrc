@@ -20,6 +20,8 @@ alias e='emacsclient -n'
 alias ew='emacsclient'
 alias ecw='emacsc'
 
+alias gradle='gw'
+
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -39,7 +41,7 @@ export EDITOR='vim'
 
 export VAGRANT_HOME=/VM/.vagrant.d
 
-export PATH="/Users/carsten.lenz/bin:$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$HOME/bin:$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="$PATH:$HOME/.jenv/bin"
 export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 
