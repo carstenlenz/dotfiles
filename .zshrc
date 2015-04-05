@@ -10,7 +10,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="pure"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git brew autojump vagrant vim-interaction osx lein wd)
+plugins=(git brew autojump vagrant vim-interaction osx lein wd vi-mode sbt)
 
 # Configures Git integration 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
