@@ -15,6 +15,8 @@ plugins=(git brew autojump vagrant vim-interaction osx lein wd vi-mode sbt)
 # Configures Git integration 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+setopt HIST_IGNORE_SPACE
+
 source $ZSH/oh-my-zsh.sh
 
 # Aliases 
@@ -22,6 +24,8 @@ alias m='mvim --remote-silent'
 alias zshconf='m ~/.zshrc'
 alias readlink='greadlink'
 alias gradle='gw'
+alias opentests='open build/reports/tests/index.html'
+alias gpa='find `pwd` -type d -exec test -d {}/.git \; -and -exec git -C {} pull --rebase \;'
 
 # Emacs aliases - too complicated by the way
 alias Emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
