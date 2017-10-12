@@ -1,0 +1,36 @@
+[user]
+    name = Carsten Lenz
+    email = carsten.lenz@aoe.com
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    up = rebase
+    ci = commit
+    pom = push origin master
+    sa = submodule add 
+    glog = log --graph --decorate --oneline --abbrev-commit --all --color
+    update = pull --rebase
+    fetchall = fetch --all --tags
+    mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+    sms = submodule sync --recursive
+    smu = submodule update --init --recursive
+
+[core]
+    editor = vim
+    excludesfile = /Users/carsten.lenz/.gitignore_global
+	autocrlf = input
+
+[difftool "idea"]
+    cmd = idea diff \"$LOCAL\" \"$REMOTE\" 
+    path =
+
+[push]
+    default = simple
+
+[credential]
+    helper = osxkeychain
+
+[http]
+    #proxy = http://localhost:8000
