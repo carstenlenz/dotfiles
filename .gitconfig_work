@@ -1,11 +1,12 @@
 [user]
     name = Carsten Lenz
-    email = carsten.lenz@aoe.com
+    email = carsten.lenz@omnevo.net
+    signingkey = 0x037E2E4CAF21184D
 
 [alias]
     st = status
     co = checkout
-    cob = checkout -b 
+    cob = checkout -b
     b = branch
     bd = branch -d
     bdf = branch -D
@@ -15,7 +16,7 @@
     ci = commit
     ca = commit --amend
     pom = push origin master
-    sa = submodule add 
+    sa = submodule add
     glog = log --graph --decorate --oneline --abbrev-commit --all --color
     up = pull --rebase
     update = pull --rebase
@@ -27,32 +28,13 @@
 
     cleanup = !git branch --merged | egrep -v \"(^\\*|master)\" | xargs git branch -d
 
-    eroeffne = init
-    machnach = clone
-    zieh = pull
-    fueghinzu = add
-    drueck = push
-    pfusch = push
-    zweig = branch
-    verzweige = branch
-    uebergib = commit
-    erde = rebase
-    unterscheide = diff
-    vereinige = merge
-    bunkere = stash
-    markiere = tag
-    nimm = checkout
-    tagebuch = log
-    zustand = status
-	hol = fetch
-
 [core]
-    editor = vim
-    excludesfile = /Users/carsten.lenz/.gitignore_global
-	autocrlf = input
+    editor = nvim
+    excludesFile = /Users/carsten.lenz/.gitignore
+    autocrlf = input
 
 [difftool "idea"]
-    cmd = idea diff \"$LOCAL\" \"$REMOTE\" 
+    cmd = idea diff \"$LOCAL\" \"$REMOTE\"
     path =
 
 [push]
@@ -63,3 +45,19 @@
 
 [http]
     #proxy = http://localhost:8000
+[filesystem "AdoptOpenJDK|11.0.7|/dev/disk1s1"]
+	timestampResolution = 23000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
+[filesystem "GraalVM Community|11.0.8|/dev/disk1s1"]
+	timestampResolution = 9000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
+[credential "https://gitlab.omnevo.net"]
+	username = carsten.lenz
+[credential "https://gitlab-internal.srv.hq.aoe.lan"]
+        username = carsten.lenz
+[credential "https://gitlab.com/omnevo"]
+	username = carsten.lenz
+[tag]
+	gpgSign = true
+[commit]
+	gpgSign = true
