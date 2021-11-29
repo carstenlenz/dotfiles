@@ -6,35 +6,93 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+#
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="pure"
+# ZSH_THEME="spaceship"
+# ZSH_THEME="agnoster"
+ZSH_THEME="spaceship"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git brew autojump vagrant vim-interaction osx wd sbt docker-completion)
+plugins=(
+    git
+    brew
+    vim-interaction
+    osx
+    wd
+    sbt
+    docker
+    kubectl
+    git-open
+)
 
 # autoload -U compinit && compinit
 
 # Configures Git integration 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_AUTO_TITLE="true"
 
 setopt HIST_IGNORE_SPACE
 
+fpath=("$HOME/.zsh/zfunctions" $fpath)
 source $ZSH/oh-my-zsh.sh
 
+# Customize Spaceship Theme
+SPACESHIP_CHAR_SYMBOL=❯
+SPACESHIP_CHAR_SUFFIX=" "
+
+SPACESHIP_PROMPT_ORDER=(
+  # time          # Time stamps section
+  # user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  # hg            # Mercurial section (hg_branch  + hg_status)
+  # package       # Package version
+  # gradle        # Gradle section
+  # maven         # Maven section
+  # node          # Node.js section
+  # ruby          # Ruby section
+  # elixir        # Elixir section
+  # xcode         # Xcode section
+  # swift         # Swift section
+  # golang        # Go section
+  # php           # PHP section
+  # rust          # Rust section
+  # haskell       # Haskell Stack section
+  # julia         # Julia section
+  # docker        # Docker section
+  # aws           # Amazon Web Services section
+  # gcloud        # Google Cloud Platform section
+  # venv          # virtualenv section
+  # conda         # conda virtualenv section
+  # pyenv         # Pyenv section
+  # dotnet        # .NET section
+  # ember         # Ember.js section
+  # kubectl       # Kubectl context section
+  # terraform     # Terraform workspace section
+  exec_time     # Execution time
+  line_sep      # Line break
+  # battery       # Battery level and status
+  # vi_mode       # Vi-mode indicator
+  # jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+# Pure Theme - disabled
+# autoload -U promptinit; promptinit
+# prompt pure
+
 # Aliases 
-alias m='mvim --remote-silent'
-alias zshconf='m ~/.zshrc'
+alias vim='nvim'
+alias vimdiff='nvim -d'
+alias zshconf='vim ~/.zshrc'
 alias readlink='greadlink'
 alias gradle='gw'
 alias ot='open build/reports/tests/index.html'
 alias gpa='find `pwd` -type d -exec test -d {}/.git \; -and -exec git -C {} pull --rebase \;'
-
-# Emacs aliases - too complicated by the way
-alias Emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
-alias emacs='emacsc -n'
-alias e='emacsclient -n'
-alias ew='emacsclient'
-alias ecw='emacsc'
+alias kl='kubectl'
+alias depp='git'
 
 # Language setup
 export LC_ALL=en_US.UTF-8
@@ -43,29 +101,65 @@ export LANG=en_US.UTF-8
 # Default timeout would lead to delays in Vim when switching from insert to normal mode
 export KEYTIMEOUT=1
 
-export EDITOR='vim'
+export EDITOR='nvim'
 
 export GIT_TERMINAL_PROMPT=1
 
-export VAGRANT_HOME=/VM/.vagrant.d
+export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
 
-export GOPATH="/development/golang"
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH="/Users/carsten.lenz/work/projects/go"
+export PATH=$PATH:${GOPATH//://bin:}/bin
 
-export PATH="$HOME/bin:$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin"
-export PATH="$PATH:$HOME/.jenv/bin"
-export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
+
+# Use Homebrew ruby
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
+
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:/work/projects/om3/core/platform/tools"
+export PATH="$PATH:/Users/carsten.lenz/.local/bin"
 
-function postCallVim {
-  osascript -e 'tell application "MacVim" to activate'
-}
+# Other stuff for Homebrew ruby to win
+export LDFLAGS="-L/usr/local/opt/ruby/lib"
+export CPPFLAGS="-I/usr/local/opt/ruby/include"
+export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
 
+# GPG
+export KEYID=0x037E2E4CAF21184D
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# OM3 Stuff
+
+export DEVICE_TOKEN_ARN=arn:aws:iam::406659825668:mfa/carsten.lenz@aoe.com
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export MOB_NEXT_STAY=true
+
+# Utils
 function dr {
     docker run --rm -tiP -v $(pwd):/workspace -w /workspace ${1:-ubuntuhere} ${2:-/bin/bash} ${@:3}
 }
 
-eval "$(rbenv init -)"
-[[ -s "/Users/carsten.lenz/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/carsten.lenz/.sdkman/bin/sdkman-init.sh"
-eval "$(jenv init -)"
+function mfa_aws() {
+    mfa_token=$(ykman oath accounts code carsten.lenz@omnevo.net@om3-meta -s)
+    awsume --mfa-token $mfa_token om3-meta-getsessiontoken -o om3-meta
+}
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+function ykauth() {
+  output=$(ykman oath accounts code $1)
+  code=$(echo $output | grep -Eo '[0-9]{6}')
+  [[ $? = 0 ]] && echo $code | pbcopy && echo $output || echo "Code not found"
+}
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/carsten.lenz/.sdkman"
+[[ -s "/Users/carsten.lenz/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/carsten.lenz/.sdkman/bin/sdkman-init.sh"
+

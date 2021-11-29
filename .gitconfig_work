@@ -5,17 +5,46 @@
 [alias]
     st = status
     co = checkout
-    br = branch
-    up = rebase
+    cob = checkout -b 
+    b = branch
+    bd = branch -d
+    bdf = branch -D
+    r = rebase
+    rem = rebase master
+    ri = rebase -i
     ci = commit
+    ca = commit --amend
     pom = push origin master
     sa = submodule add 
     glog = log --graph --decorate --oneline --abbrev-commit --all --color
+    up = pull --rebase
     update = pull --rebase
     fetchall = fetch --all --tags
     mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+
     sms = submodule sync --recursive
     smu = submodule update --init --recursive
+
+    cleanup = !git branch --merged | egrep -v \"(^\\*|master)\" | xargs git branch -d
+
+    eroeffne = init
+    machnach = clone
+    zieh = pull
+    fueghinzu = add
+    drueck = push
+    pfusch = push
+    zweig = branch
+    verzweige = branch
+    uebergib = commit
+    erde = rebase
+    unterscheide = diff
+    vereinige = merge
+    bunkere = stash
+    markiere = tag
+    nimm = checkout
+    tagebuch = log
+    zustand = status
+	hol = fetch
 
 [core]
     editor = vim
