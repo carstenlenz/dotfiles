@@ -17,7 +17,7 @@ plugins=(
     git
     brew
     vim-interaction
-    osx
+    macos
     wd
     sbt
     docker
@@ -109,9 +109,12 @@ export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
 
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH="/Users/carsten.lenz/work/projects/go"
-export PATH=$PATH:${GOPATH//://bin:}/bin
 
+# All sorts of PATH manipulation
+export PATH=$PATH:${GOPATH//://bin:}/bin
 export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
+
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Use Homebrew ruby
 export PATH="/usr/local/opt/ruby/bin:$PATH"
