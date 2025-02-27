@@ -34,6 +34,7 @@ DISABLE_AUTO_TITLE="true"
 setopt HIST_IGNORE_SPACE
 
 fpath=("$HOME/.zsh/zfunctions" $fpath)
+# fpath=("/Users/carsten.lenz/Library/Application Support/ScalaCli/completions/zsh" $fpath)
 source $ZSH/oh-my-zsh.sh
 
 # Customize Spaceship Theme
@@ -84,15 +85,16 @@ SPACESHIP_PROMPT_ORDER=(
 # prompt pure
 
 # Aliases 
-alias vim='nvim'
-alias vimdiff='nvim -d'
+# alias vim='nvim'
+# alias vimdiff='nvim -d'
 alias zshconf='vim ~/.zshrc'
 alias readlink='greadlink'
-alias gradle='gw'
 alias ot='open build/reports/tests/index.html'
 alias gpa='find `pwd` -type d -exec test -d {}/.git \; -and -exec git -C {} pull --rebase \;'
 alias kl='kubectl'
 alias depp='git'
+alias listenports='lsof -i -P | grep -i "listen"'
+alias tg='/opt/homebrew/bin/terragrunt'
 
 # Language setup
 export LC_ALL=en_US.UTF-8
@@ -107,22 +109,24 @@ export GIT_TERMINAL_PROMPT=1
 
 export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
 
-export GOROOT=/usr/local/opt/go/libexec
-export GOPATH="/Users/carsten.lenz/work/projects/go"
+export GOPATH="/Users/carsten.lenz/projects/go"
 
 # All sorts of PATH manipulation
 export PATH=$PATH:${GOPATH//://bin:}/bin
 export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
 
-export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 # Use Homebrew ruby
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
+# export PATH="/usr/local/opt/ruby/bin:$PATH"
+# export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
 
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:/work/projects/om3/core/platform/tools"
 export PATH="$PATH:/Users/carsten.lenz/.local/bin"
+export PATH="${PATH}:${HOME}/.krew/bin"
+
+export PATH="/opt/homebrew/opt/postgresql@13/bin:${PATH}"
 
 # Other stuff for Homebrew ruby to win
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
@@ -130,7 +134,10 @@ export CPPFLAGS="-I/usr/local/opt/ruby/include"
 export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
 
 # GPG
-export KEYID=0x037E2E4CAF21184D
+
+# Old KEYID of lost master key
+# export KEYID=0x037E2E4CAF21184D
+export KEYID=0x28089862FF310648
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -145,6 +152,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export MOB_NEXT_STAY=true
+export MOB_OPEN_COMMAND="idea %"
+
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 
 # Utils
 function dr {
@@ -161,6 +172,8 @@ function ykauth() {
   code=$(echo $output | grep -Eo '[0-9]{6}')
   [[ $? = 0 ]] && echo $code | pbcopy && echo $output || echo "Code not found"
 }
+
+source ~/bin/proj
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/carsten.lenz/.sdkman"
